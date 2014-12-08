@@ -11,7 +11,7 @@
 
 int main(){
 
-printf("\nHeuristique Non triée\n");
+printf("\nHeuristique non triée\n");
 heuristiqueNonTrie();
-return 0;
+ return 0;
 }

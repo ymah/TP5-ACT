@@ -12,7 +12,6 @@ void heuristiqueTrie(){
 
   getData();
   triData();
-  sac[0]=cap;
   courant = 0;
   printf("\n----------------------\n");
   for(i=0;i<nobjet;i++)
@@ -20,7 +19,7 @@ void heuristiqueTrie(){
       printf("les objets sont trop gros pour les sacs");
       return ;
     }
-  heuristique1(objet,nobjet);
+  heuristique1(objet,nobjet,sac,cap);
   printf("Heuristique 1- Capacité de chaque sac %d\n",cap);
 
   for(i=0;i<nobjet;i++){
@@ -30,14 +29,14 @@ void heuristiqueTrie(){
 
   printf("\n----------------------\n");
 
-  heuristique2(objet,nobjet);
+  heuristique2(objet,nobjet,sac,cap);
   printf("Heuristique 2- Capacité de chaque sac %d\n",cap);
   for(i=0;i<nobjet;i++){
     printf("le %d eme de poids %d dans le sac %d\n",i+1,objet[i],res[i]+1);
   }
   printf("\n----------------------\n");
 
-  heuristique3(objet,nobjet);
+  heuristique3(objet,nobjet,sac,cap);
   printf("Heuristique 3- Capacité de chaque sac %d\n",cap);
   for(i=0;i<nobjet;i++){
     printf("le %d eme de poids %d dans le sac %d\n",i+1,objet[i],res[i]+1);
