@@ -12,6 +12,7 @@ void heuristiqueTrie(){
 
   getData();
   triData();
+
   courant = 0;
   printf("\n----------------------\n");
   for(i=0;i<nobjet;i++)
