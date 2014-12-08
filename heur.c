@@ -79,7 +79,7 @@ int heuristique2(int *objet,int o_size,int *lsac,int cap_s){
       j++;
       lsac[j]= cap - objet[i];
       res[i] = j;
-      courant = j+1;
+      courant = j;
     }
 
   }
@@ -92,24 +92,27 @@ int heuristique3(int *objet,int o_size,int *lsac,int cap_s){
   for(i=0;i<o_size;i++){
     lsac[i]=cap_s;
   }
+  j=0;
   fort = 0;
   for(i=0;i<o_size;i++){
     for(j=0;j<o_size;j++){
-      if(lsac[j] > sac[fort]){
-        fort =j;
-      }
-      if((lsac[fort] - objet[i]) >=0){
-          lsac[fort] -= objet[i];
-          res[i] = j;
-          ok = 1;
-          break;
+
+
+      if((lsac[fort] - objet[i]) >= 0){
+        if(lsac[j] > lsac[fort]){
+          fort =j;
+        }
+        lsac[fort] -= objet[i];
+        res[i] = j;
+        ok = 1;
+        break;
       }
     }
     if(!ok){
       j++;
       lsac[j]= cap - objet[i];
       res[i] =j ;
-      courant = j+1;
+      courant = j;
     }
   }
 
@@ -125,11 +128,7 @@ void getData(){
 
   if((c=getchar()) == EOF)
     exit(EXIT_FAILURE);
-
-
   nobjet =c -'0';
-
-
   printf("\nNombre d'objets : %d\n",nobjet);
   objet = calloc(nobjet,sizeof(int));
 
@@ -138,6 +137,7 @@ void getData(){
       exit(EXIT_FAILURE);
     if(c==10 || c==32)
       continue;
+
     objet[i]= c - '0';
     printf("%d ",objet[i]);
     i++;

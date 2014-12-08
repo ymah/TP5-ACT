@@ -11,5 +11,6 @@ int partition(){
 
   heuristique1(objet,nobjet,sac,2);
 
+  
   return 0;
 }
