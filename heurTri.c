@@ -61,7 +61,7 @@ void quickSort( int a[], int l, int r)
 
   if( l < r )
     {
-      j = partition( a, l, r);
+      j = partitionner( a, l, r);
       quickSort( a, l, j-1);
       quickSort( a, j+1, r);
     }
@@ -70,7 +70,7 @@ void quickSort( int a[], int l, int r)
 
 
 
-int partition( int a[], int l, int r) {
+int partitionner( int a[], int l, int r) {
   int pivot, i, j, t;
   pivot = a[l];
   i = l; j = r+1;

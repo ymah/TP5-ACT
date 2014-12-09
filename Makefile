@@ -18,7 +18,7 @@ all: $(BINARIES) #$(OBJECTS)
 ###------------------------------------------------------------
 # british_museum: british_museum.o
 # 	$(CC) $(CFLAGS) -o $@ $^ $(MATH)
-heuristique:heur.o heurTri.o heuristique.o
+heuristique:partition.o heur.o heurTri.o heuristique.o
 	$(CC) $(CFLAGS) -o $@ $^ $(MATH)
 
 ###------------------------------
@@ -30,7 +30,7 @@ heuristique:heur.o heurTri.o heuristique.o
 heur.o:heur.h heur.c
 heurTri.o:  heur.h heurTri.h heurTri.c
 heuristique.o:heurTri.h heur.h heuristique.c
-
+partition.o:heurTri.h heur.h partition.h
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< $(INCDIR)
 

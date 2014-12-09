@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "heurTri.h"
 #include "heur.h"
-
+#include "partition.h"
 
 
 
@@ -11,7 +11,7 @@
 
 int main(){
 
-printf("\nHeuristique non triée\n");
-heuristiqueNonTrie();
- return 0;
+  printf("\nPartition \n");
+  partition();
+  return 0;
 }

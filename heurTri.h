@@ -8,4 +8,4 @@ int cap;
 void heuristiqueTrie();
 void triData();
 void quickSort( int a[], int l, int r);
-int partition( int a[], int l, int r);
+int partitionner( int a[], int l, int r);
