@@ -52,7 +52,7 @@ int heuristique1(int *objet,int o_size,int *lsac,int cap_s){
       res[i] = courant;
     }else{
       courant++;
-      lsac[courant]= cap - objet[i];
+      lsac[courant]= cap_s - objet[i];
       res[i] = courant;
     }
   }
@@ -66,6 +66,7 @@ int heuristique2(int *objet,int o_size,int *lsac,int cap_s){
   for(i=0;i<o_size;i++){
     lsac[i]=cap_s;
   }
+  ok = 0;
   for(i=0;i<o_size;i++){
     for(j=0;j<o_size;j++){
       if((lsac[j] - objet[i]) >= 0){
@@ -76,8 +77,9 @@ int heuristique2(int *objet,int o_size,int *lsac,int cap_s){
       }
     }
     if(!ok){
+      ok=0;
       j++;
-      lsac[j]= cap - objet[i];
+      lsac[j]= cap_s - objet[i];
       res[i] = j;
       courant = j;
     }
@@ -92,7 +94,8 @@ int heuristique3(int *objet,int o_size,int *lsac,int cap_s){
   for(i=0;i<o_size;i++){
     lsac[i]=cap_s;
   }
-  j=0;
+
+  ok = j=0;
   fort = 0;
   for(i=0;i<o_size;i++){
     for(j=0;j<o_size;j++){
@@ -110,7 +113,8 @@ int heuristique3(int *objet,int o_size,int *lsac,int cap_s){
     }
     if(!ok){
       j++;
-      lsac[j]= cap - objet[i];
+      ok=0;
+      lsac[j]= cap_s - objet[i];
       res[i] =j ;
       courant = j;
     }
