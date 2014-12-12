@@ -1,181 +1,536 @@
 RENDU Mahieddine Yaker - Nicolas Echallier
 
-
-Avant propos : dans les calculs de compléxité, je me suis borné à n'utiliser que des entiers car les chiffres que nous manipulons sont trop petit pour que la taille des entier en machine aient une importance. De plus, au vus de la compléxité de nos algo, leurs utilisation sur des nombres qui nécessiteraient de prendre en compte leur taille machine serait infaisable.
-
-Utilisation:
-Mode vérification:
-./british_museum -v [path to file] puis entrer le certificat
-ex :
-./british_museum -v donnees/data_BinPack/exemple1
-
-Mode non deterministe :
-./british_museum -nd [path to file]
-ex :
-./british_museum -nd donnees/data_BinPack/exemple1
-
-Mode exploration exhaustive
-./british_museum -exh [path to file]
-ex :
-./british_museum -exh donnees/data_BinPack/exemple1
-
-Mode partition
-./british_museum -partition [path to file]
-ex :
-./british_museum -partition donnees/data_Reduction/exPartition1
-
-Mode sum
-./british_museum -sum [path to file]
-ex : 
-./british_museum -sum donnees/data_Reduction/exSum1
-
----- EX 1
-Q1
-On va faire un tableau "certif" de int qui va, pour chaque objet, y associer le sac correspondant (donc on sera en n).
-
-La taille du certificat sera la suivante :
-- on a n+3 données en entrée
-- la certificat sera en n. 
-- le certificat sera donc polynomial en fonction des données en entrée.
-
-Algo
-Créer une liste "sacs" de k sacs initialisé à c
-On parcours certif et on soustrait à "sacs" le poid associé à l'objet
-	Si la taille du sac est inferieur à 0; return false;
-
-A la fin du parcours, on retourne true.
-
-Complexité : n, il est donc bien polynomial.
-
-Q2
-Le but, ici, est de trouver un algo qui sort un certificat de façon aléatoire et de s'assruer que toutes les combinaisons (i.e. les certificats) ont une chance de sortir
-Il suffit de remplir certif avec une valeure random allant de 1 à k
-
-Q3.1
-C'est en k puissance n
-
-Q3.2/3.3
-1 On va commencer avec un certificat initialisé à 0.
-2 On va tester ce certificat.
-3 Si il renvoit faut, on incrémente la valeure de la dernière case*.
-4 On refait 1
-
-* Incrémenter dernière case :
-On vérifie que le nombre dans la dernière case est est inferieur à k. Si il est inferieur, on l'incrémente. 
-Si il est superieur : on vérifie si la valeur dans n - 1 est inferieur à k.
-	Si c'est le cas, on l'incrémente et on réinitialise la case en i à 0
-	Sinon, on incrémente de 1 ce que l'on a en i - 2 et on réinitialise i - 1 à 0 (en vérifiant bien entendu que on a qqchose en i - 2)
-
-Implémentation
-En fait, je n'avais pas bien lu le sujet et j'ai parsé le fichier pour récupérer non seulement les données mais en plus le certificat... Je me suis rendu compte un peut tard que ce n'était pas nécessaire...
-J'ai donc refait une implémentation qui demande à l'utilisateurs de rentrer un certificat à la main. C'est bien plus facile à faire !!!
-
-Voila la liste des fonctions et leur utilité :
-- int* lireCertif(char *path) : permets de construire un certificat à partir des fichiers text fournis
-- int* recupereCertificat() : permets à un utilisateur de rentrer à la main un certificat
-- int verifCertificat(int * certif, int * objets) : permets de tester si le certificat est une solution du problème. Il permet aussi d'imprimer le certificat qui résout ce problème.
-- int* randomCertificat() : permet de générer un certificat de manière aléatoire
-- int exhaustive(int * objets) : permet de tester tous les certificats possible avec les données fournis en entrés. Si il en existe au moins un qui résout le problème, cette fonciton l'indique à l'utilisateur.
-
-
--------------
-EX 2
-Q4.1
-n -> nbr d'entiers
-x1 ... xn -> les entiers/poids
-c -> somme des entiers (ici des objets)/2
-k -> 2
-
-Q4.2
-On peut en déduire que BinPack est NP-dure.
-
-Q4.3
-L'implémentation a étét fait dans la fonction int partition(int * objets).
-Lancer le programe sur l'un des fichiers exPartition[n] avec l'option -partition.
-Ex : ./british_museum -partition [path to file]
-
-Q5.1
-Partition est un cas particulier de Sum, en effet, la somme des elements correspondants aux entiers choisi peut etre la moitié de la somme totale.
-
-Q5.2
-L'implémentaiotn est dans la fonction int sum(int * objets).
-
-En gros : on va rajouter 2 choses sans le certificat :
-- une grosse valeure (j'ai utilisé la variable INT_MAX que j'ai divisé par 3, histoire d'être sur que je n'aurai pas un int trop gros à gérer)
-- la même valeur à laquelle on enlève le nombre que l'on veut trouver (dans mon implémentation, elle est récupéré dans k) et à laquelle on ajoute (la somme des entiers moins k)
-=======
-n -> nbr d'entiers
-x1 ... xn -> les entiers/poids
-à l'instart de Partition, nous allons choisir la somme des entiers comme etat SUM(xi)/2
-
-
-Comme cela, si il existe un sous ensemble de nombre qui font k, nous pourrons le trouver en utilisant partition.
-
-Pour lancer le test :
-./british_museum -sum [lien vers fichier]
-./british_museum -sum donnees/data_Reduction/exSum2
-
-Q6
-Voir fonction sum(int * objets)
-
-
--- BONUS --
-
-
-Q7.1
-le certificat de BinPack est un tableau de repartition des objets.
-la difference entre BinPackDiff et BinPack, reside dans le fait que les poids des sacs sont differents.
-On peut toujours garder le meme certificat.
-
-On continue toujours de tester un certificat Donné avec l'algorithme de BinPack.
-
-Q7.2
-Le probleme de KnapSackExact peut etre reduit polynomialement en Sum.
-En effet, Sum, consiste a trouver un sous ensemble J C [1..n], tq la somme soit egale à un entier.
-Pour réduire donc le probleme, on simplement lancer le probleme Sum 2 fois :
-1- Une fois pour trouver les pi tq SUM(pi) = p
-2- Une seconde fois pour trouver les vi tq SUM(vi) = v
-
-Le probleme est simplement executé deux fois, donc il reste polynomiale
+Les 3 heuristique marchent en mode offline ou en mode online.
+Pour les lancer :
+./binPack -[mode] [path to data]
 
 
 
-
-Q8.2
-On sait que P est incluse ou egale à NP.
-
-BinPack est un cas particulier de BinOpt1
-En effet, le probleme de BinOpt1 consiste à trouver un certain nomre de sac d'une certaine capacité et de tester s'il peuvent contenir ou non ces objets. Or dans BinPack, on a deja ces sacs, et on teste seulement la contenance possible.
-
-Supposons que BinOpt1 etait P.
-cela impliquait qu'il existe un algorithme de compléxité O(n^k).
-
-Comme BinPack est un cas Particulier de BinOpt1, on peut supposer que BinOpt1 se reduit polynomalement en BinPack.
-
-Il s'agirait donc d'executer k fois BinPack avec i sacs allant de 1 à k, afin d'obtenir un resultat.
-
-Avec ces hypothese, on peut donc penser que BinPack est aussi P.
-
-
-
-
-
-
-
-
-
-NB : je part du principe que l'on peut réduire polynomialement les BinOpt dans Binpack
-Q8.2
-Je ne pense pas que l'on peut prouver que BinPack est P en partant du constat que BinOpt1 est P. En effet, on put voire les réduction entre BinPack et BinOpt1 ci-dessous :
-BinOpt1 -> BinPack
-Hors, tout ce que l'on sait ici, c'est que BinOpt est <= à BiniPack. On ne peut donc rien conclure.
-
-Q8.3
-Ici, par contre, on peut prouver que si ce problème BinPack était P, BinOpt1 le serait aussi. En effet, comme je l'ai expliqué plus, on put voire les réduction entre BinPack et BinOpt1 ci-dessous :
-BinOpt1  -> BinPack
-Hors, on sait que BinPack >= BinOpt1. Donc, BinOpt1 est lui aussi P.
-
-Q8.4
-C'est exactement le même raisonement que pour 8.3.
-BinOpt2  -> BinPack
-Hors, on sait que BinPack >= BinOpt2. Donc, BinOpt2 est lui aussi P.
+Tests :
+---------- EX1 ----------
+5 objets: 2 5 7 3 1
+3 sacs: 8 8 8
+Résumé :
+en mode offline, les 3 heuristique renvois les mêmes résultats
+en mode online, les heuristque 2 et 3 sont meilleures (elles remplissent les premiers sacs d'une meilleure manière) et elles les remplissent de la même manière.
+--offline--
+HEURISTIQUE 1
+L'objet 1 de poid 1 va dans le sac 1
+L'objet 2 de poid 2 va dans le sac 1
+L'objet 3 de poid 3 va dans le sac 1
+L'objet 4 de poid 5 va dans le sac 2
+L'objet 5 de poid 7 va dans le sac 3
+---------POID---------
+le sac 0 a un poid 6
+le sac 1 a un poid 5
+le sac 2 a un poid 7
+nbr de sac = 3
+HEURISTIQUE 2
+-------------------
+L'objet 1 de poid 1 va dans le sac 1
+L'objet 2 de poid 2 va dans le sac 1
+L'objet 3 de poid 3 va dans le sac 1
+L'objet 4 de poid 5 va dans le sac 2
+L'objet 5 de poid 7 va dans le sac 3
+---------POID---------
+le sac 0 a un poid 6
+le sac 1 a un poid 5
+le sac 2 a un poid 7
+nbr de sac = 3
+HEURISTIQUE 3
+-------------------
+L'objet 1 de poid 1 va dans le sac 1
+L'objet 2 de poid 2 va dans le sac 1
+L'objet 3 de poid 3 va dans le sac 1
+L'objet 4 de poid 5 va dans le sac 2
+L'objet 5 de poid 7 va dans le sac 3
+---------POID---------
+le sac 0 a un poid 6
+le sac 1 a un poid 5
+le sac 2 a un poid 7
+nbr de sac = 3
+------------------------------------
+--online--
+HEURISTIQUE 1
+L'objet 1 de poid 2 va dans le sac 1
+L'objet 2 de poid 5 va dans le sac 1
+L'objet 3 de poid 7 va dans le sac 2
+L'objet 4 de poid 3 va dans le sac 3
+L'objet 5 de poid 1 va dans le sac 3
+---------POID---------
+le sac 0 a un poid 7
+le sac 1 a un poid 7
+le sac 2 a un poid 4
+nbr de sac = 3
+HEURISTIQUE 2
+-------------------
+L'objet 1 de poid 2 va dans le sac 1
+L'objet 2 de poid 5 va dans le sac 1
+L'objet 3 de poid 7 va dans le sac 2
+L'objet 4 de poid 3 va dans le sac 3
+L'objet 5 de poid 1 va dans le sac 1
+---------POID---------
+le sac 0 a un poid 8
+le sac 1 a un poid 7
+le sac 2 a un poid 3
+nbr de sac = 3
+HEURISTIQUE 3
+-------------------
+L'objet 1 de poid 2 va dans le sac 1
+L'objet 2 de poid 5 va dans le sac 1
+L'objet 3 de poid 7 va dans le sac 2
+L'objet 4 de poid 3 va dans le sac 3
+L'objet 5 de poid 1 va dans le sac 1
+---------POID---------
+le sac 0 a un poid 8
+le sac 1 a un poid 7
+le sac 2 a un poid 3
+nbr de sac = 3
+---------- EX2 ----------
+5 objets: 3 5 7 3 3
+3 sacs: 7 7 7
+Résumé :
+en mode offline, les 3 heuristique renvois les mêmes résultats
+en mode online, les heuristque 2 et 3 sont meilleures (elles remplissent les premiers sacs d'une meilleure manière) et elles les remplissent de la même manière.
+--offline--
+HEURISTIQUE 1
+L'objet 1 de poid 3 va dans le sac 1
+L'objet 2 de poid 3 va dans le sac 1
+L'objet 3 de poid 3 va dans le sac 2
+L'objet 4 de poid 5 va dans le sac 3
+L'objet 5 de poid 7 va dans le sac 4
+---------POID---------
+le sac 0 a un poid 6
+le sac 1 a un poid 3
+le sac 2 a un poid 5
+le sac 3 a un poid 7
+nbr de sac = 4
+HEURISTIQUE 2
+-------------------
+L'objet 1 de poid 3 va dans le sac 1
+L'objet 2 de poid 3 va dans le sac 1
+L'objet 3 de poid 3 va dans le sac 2
+L'objet 4 de poid 5 va dans le sac 3
+L'objet 5 de poid 7 va dans le sac 4
+---------POID---------
+le sac 0 a un poid 6
+le sac 1 a un poid 3
+le sac 2 a un poid 5
+le sac 3 a un poid 7
+nbr de sac = 4
+HEURISTIQUE 3
+-------------------
+L'objet 1 de poid 3 va dans le sac 1
+L'objet 2 de poid 3 va dans le sac 1
+L'objet 3 de poid 3 va dans le sac 2
+L'objet 4 de poid 5 va dans le sac 3
+L'objet 5 de poid 7 va dans le sac 4
+---------POID---------
+le sac 0 a un poid 6
+le sac 1 a un poid 3
+le sac 2 a un poid 5
+le sac 3 a un poid 7
+nbr de sac = 4
+--online--
+HEURISTIQUE 1
+L'objet 1 de poid 3 va dans le sac 1
+L'objet 2 de poid 5 va dans le sac 2
+L'objet 3 de poid 7 va dans le sac 3
+L'objet 4 de poid 3 va dans le sac 4
+L'objet 5 de poid 3 va dans le sac 4
+---------POID---------
+le sac 0 a un poid 3
+le sac 1 a un poid 5
+le sac 2 a un poid 7
+le sac 3 a un poid 6
+nbr de sac = 4
+HEURISTIQUE 2
+-------------------
+L'objet 1 de poid 3 va dans le sac 1
+L'objet 2 de poid 5 va dans le sac 2
+L'objet 3 de poid 7 va dans le sac 3
+L'objet 4 de poid 3 va dans le sac 1
+L'objet 5 de poid 3 va dans le sac 4
+---------POID---------
+le sac 0 a un poid 6
+le sac 1 a un poid 5
+le sac 2 a un poid 7
+le sac 3 a un poid 3
+nbr de sac = 4
+HEURISTIQUE 3
+-------------------
+L'objet 1 de poid 3 va dans le sac 1
+L'objet 2 de poid 5 va dans le sac 2
+L'objet 3 de poid 7 va dans le sac 3
+L'objet 4 de poid 3 va dans le sac 1
+L'objet 5 de poid 3 va dans le sac 4
+---------POID---------
+le sac 0 a un poid 6
+le sac 1 a un poid 5
+le sac 2 a un poid 7
+le sac 3 a un poid 3
+nbr de sac = 4
+---------- EX3 ----------
+8 objets: 2 6 5 2 5 5 2 8
+4 sacs: 9 9 9 9
+Résumé :
+en mode offline, les 3 heuristique renvois les mêmes résultats
+en mode online, les heuristque 2 et 3 sont meilleures et équivalente.
+--offline--
+HEURISTIQUE 1
+L'objet 1 de poid 2 va dans le sac 1
+L'objet 2 de poid 2 va dans le sac 1
+L'objet 3 de poid 2 va dans le sac 1
+L'objet 4 de poid 5 va dans le sac 2
+L'objet 5 de poid 5 va dans le sac 3
+L'objet 6 de poid 5 va dans le sac 4
+L'objet 7 de poid 6 va dans le sac 5
+L'objet 8 de poid 8 va dans le sac 6
+---------POID---------
+le sac 0 a un poid 6
+le sac 1 a un poid 5
+le sac 2 a un poid 5
+le sac 3 a un poid 5
+le sac 4 a un poid 6
+le sac 5 a un poid 8
+nbr de sac = 6
+HEURISTIQUE 2
+-------------------
+L'objet 1 de poid 2 va dans le sac 1
+L'objet 2 de poid 2 va dans le sac 1
+L'objet 3 de poid 2 va dans le sac 1
+L'objet 4 de poid 5 va dans le sac 2
+L'objet 5 de poid 5 va dans le sac 3
+L'objet 6 de poid 5 va dans le sac 4
+L'objet 7 de poid 6 va dans le sac 5
+L'objet 8 de poid 8 va dans le sac 6
+---------POID---------
+le sac 0 a un poid 6
+le sac 1 a un poid 5
+le sac 2 a un poid 5
+le sac 3 a un poid 5
+le sac 4 a un poid 6
+le sac 5 a un poid 8
+nbr de sac = 6
+HEURISTIQUE 3
+-------------------
+L'objet 1 de poid 2 va dans le sac 1
+L'objet 2 de poid 2 va dans le sac 1
+L'objet 3 de poid 2 va dans le sac 1
+L'objet 4 de poid 5 va dans le sac 2
+L'objet 5 de poid 5 va dans le sac 3
+L'objet 6 de poid 5 va dans le sac 4
+L'objet 7 de poid 6 va dans le sac 5
+L'objet 8 de poid 8 va dans le sac 6
+---------POID---------
+le sac 0 a un poid 6
+le sac 1 a un poid 5
+le sac 2 a un poid 5
+le sac 3 a un poid 5
+le sac 4 a un poid 6
+le sac 5 a un poid 8
+nbr de sac = 6
+--online--
+HEURISTIQUE 1
+L'objet 1 de poid 2 va dans le sac 1
+L'objet 2 de poid 6 va dans le sac 1
+L'objet 3 de poid 5 va dans le sac 2
+L'objet 4 de poid 2 va dans le sac 2
+L'objet 5 de poid 5 va dans le sac 3
+L'objet 6 de poid 5 va dans le sac 4
+L'objet 7 de poid 2 va dans le sac 4
+L'objet 8 de poid 8 va dans le sac 5
+---------POID---------
+le sac 0 a un poid 8
+le sac 1 a un poid 7
+le sac 2 a un poid 5
+le sac 3 a un poid 7
+le sac 4 a un poid 8
+nbr de sac = 5
+HEURISTIQUE 2
+-------------------
+L'objet 1 de poid 2 va dans le sac 1
+L'objet 2 de poid 6 va dans le sac 1
+L'objet 3 de poid 5 va dans le sac 2
+L'objet 4 de poid 2 va dans le sac 2
+L'objet 5 de poid 5 va dans le sac 3
+L'objet 6 de poid 5 va dans le sac 4
+L'objet 7 de poid 2 va dans le sac 2
+L'objet 8 de poid 8 va dans le sac 5
+---------POID---------
+le sac 0 a un poid 8
+le sac 1 a un poid 9
+le sac 2 a un poid 5
+le sac 3 a un poid 5
+le sac 4 a un poid 8
+nbr de sac = 5
+HEURISTIQUE 3
+-------------------
+L'objet 1 de poid 2 va dans le sac 1
+L'objet 2 de poid 6 va dans le sac 1
+L'objet 3 de poid 5 va dans le sac 2
+L'objet 4 de poid 2 va dans le sac 2
+L'objet 5 de poid 5 va dans le sac 3
+L'objet 6 de poid 5 va dans le sac 4
+L'objet 7 de poid 2 va dans le sac 2
+L'objet 8 de poid 8 va dans le sac 5
+---------POID---------
+le sac 0 a un poid 8
+le sac 1 a un poid 9
+le sac 2 a un poid 5
+le sac 3 a un poid 5
+le sac 4 a un poid 8
+nbr de sac = 5
+---------- EX4 ----------
+8 objets: 2 6 5 2 5 5 2 8
+5 sacs: 8 8 8 8 8
+Résumé :
+en mode offline, les 3 heuristique renvois les mêmes résultats
+en mode online, les heuristque 2 et 3 sont meilleures et équivalente.
+--offline--
+HEURISTIQUE 1
+L'objet 1 de poid 2 va dans le sac 1
+L'objet 2 de poid 2 va dans le sac 1
+L'objet 3 de poid 2 va dans le sac 1
+L'objet 4 de poid 5 va dans le sac 2
+L'objet 5 de poid 5 va dans le sac 3
+L'objet 6 de poid 5 va dans le sac 4
+L'objet 7 de poid 6 va dans le sac 5
+L'objet 8 de poid 8 va dans le sac 6
+---------POID---------
+le sac 0 a un poid 6
+le sac 1 a un poid 5
+le sac 2 a un poid 5
+le sac 3 a un poid 5
+le sac 4 a un poid 6
+le sac 5 a un poid 8
+nbr de sac = 6
+HEURISTIQUE 2
+-------------------
+L'objet 1 de poid 2 va dans le sac 1
+L'objet 2 de poid 2 va dans le sac 1
+L'objet 3 de poid 2 va dans le sac 1
+L'objet 4 de poid 5 va dans le sac 2
+L'objet 5 de poid 5 va dans le sac 3
+L'objet 6 de poid 5 va dans le sac 4
+L'objet 7 de poid 6 va dans le sac 5
+L'objet 8 de poid 8 va dans le sac 6
+---------POID---------
+le sac 0 a un poid 6
+le sac 1 a un poid 5
+le sac 2 a un poid 5
+le sac 3 a un poid 5
+le sac 4 a un poid 6
+le sac 5 a un poid 8
+nbr de sac = 6
+HEURISTIQUE 3
+-------------------
+L'objet 1 de poid 2 va dans le sac 1
+L'objet 2 de poid 2 va dans le sac 1
+L'objet 3 de poid 2 va dans le sac 1
+L'objet 4 de poid 5 va dans le sac 2
+L'objet 5 de poid 5 va dans le sac 3
+L'objet 6 de poid 5 va dans le sac 4
+L'objet 7 de poid 6 va dans le sac 5
+L'objet 8 de poid 8 va dans le sac 6
+---------POID---------
+le sac 0 a un poid 6
+le sac 1 a un poid 5
+le sac 2 a un poid 5
+le sac 3 a un poid 5
+le sac 4 a un poid 6
+le sac 5 a un poid 8
+nbr de sac = 6
+--online--
+HEURISTIQUE 1
+L'objet 1 de poid 2 va dans le sac 1
+L'objet 2 de poid 6 va dans le sac 1
+L'objet 3 de poid 5 va dans le sac 2
+L'objet 4 de poid 2 va dans le sac 2
+L'objet 5 de poid 5 va dans le sac 3
+L'objet 6 de poid 5 va dans le sac 4
+L'objet 7 de poid 2 va dans le sac 4
+L'objet 8 de poid 8 va dans le sac 5
+---------POID---------
+le sac 0 a un poid 8
+le sac 1 a un poid 7
+le sac 2 a un poid 5
+le sac 3 a un poid 7
+le sac 4 a un poid 8
+nbr de sac = 5
+HEURISTIQUE 2
+-------------------
+L'objet 1 de poid 2 va dans le sac 1
+L'objet 2 de poid 6 va dans le sac 1
+L'objet 3 de poid 5 va dans le sac 2
+L'objet 4 de poid 2 va dans le sac 2
+L'objet 5 de poid 5 va dans le sac 3
+L'objet 6 de poid 5 va dans le sac 4
+L'objet 7 de poid 2 va dans le sac 3
+L'objet 8 de poid 8 va dans le sac 5
+---------POID---------
+le sac 0 a un poid 8
+le sac 1 a un poid 7
+le sac 2 a un poid 7
+le sac 3 a un poid 5
+le sac 4 a un poid 8
+nbr de sac = 5
+HEURISTIQUE 3
+-------------------
+L'objet 1 de poid 2 va dans le sac 1
+L'objet 2 de poid 6 va dans le sac 1
+L'objet 3 de poid 5 va dans le sac 2
+L'objet 4 de poid 2 va dans le sac 2
+L'objet 5 de poid 5 va dans le sac 3
+L'objet 6 de poid 5 va dans le sac 4
+L'objet 7 de poid 2 va dans le sac 3
+L'objet 8 de poid 8 va dans le sac 5
+---------POID---------
+le sac 0 a un poid 8
+le sac 1 a un poid 7
+le sac 2 a un poid 7
+le sac 3 a un poid 5
+le sac 4 a un poid 8
+nbr de sac = 5
+---------- EX5 ----------
+12 objets: 5 1 2 6 5 2 5 5 2 8 1 1
+5 sacs: 9 9 9 9 9
+Résumé :
+en mode offline, les 3 heuristique renvois les mêmes résultats
+en mode online, les heuristque 2 et 3 sont meilleures et équivalente.
+--offline--
+HEURISTIQUE 1
+L'objet 1 de poid 1 va dans le sac 1
+L'objet 2 de poid 1 va dans le sac 1
+L'objet 3 de poid 1 va dans le sac 1
+L'objet 4 de poid 2 va dans le sac 1
+L'objet 5 de poid 2 va dans le sac 1
+L'objet 6 de poid 2 va dans le sac 1
+L'objet 7 de poid 5 va dans le sac 2
+L'objet 8 de poid 5 va dans le sac 3
+L'objet 9 de poid 5 va dans le sac 4
+L'objet 10 de poid 5 va dans le sac 5
+L'objet 11 de poid 6 va dans le sac 6
+L'objet 12 de poid 8 va dans le sac 7
+---------POID---------
+le sac 0 a un poid 9
+le sac 1 a un poid 5
+le sac 2 a un poid 5
+le sac 3 a un poid 5
+le sac 4 a un poid 5
+le sac 5 a un poid 6
+le sac 6 a un poid 8
+nbr de sac = 7
+HEURISTIQUE 2
+-------------------
+L'objet 1 de poid 1 va dans le sac 1
+L'objet 2 de poid 1 va dans le sac 1
+L'objet 3 de poid 1 va dans le sac 1
+L'objet 4 de poid 2 va dans le sac 1
+L'objet 5 de poid 2 va dans le sac 1
+L'objet 6 de poid 2 va dans le sac 1
+L'objet 7 de poid 5 va dans le sac 2
+L'objet 8 de poid 5 va dans le sac 3
+L'objet 9 de poid 5 va dans le sac 4
+L'objet 10 de poid 5 va dans le sac 5
+L'objet 11 de poid 6 va dans le sac 6
+L'objet 12 de poid 8 va dans le sac 7
+---------POID---------
+le sac 0 a un poid 9
+le sac 1 a un poid 5
+le sac 2 a un poid 5
+le sac 3 a un poid 5
+le sac 4 a un poid 5
+le sac 5 a un poid 6
+le sac 6 a un poid 8
+nbr de sac = 7
+HEURISTIQUE 3
+-------------------
+L'objet 1 de poid 1 va dans le sac 1
+L'objet 2 de poid 1 va dans le sac 1
+L'objet 3 de poid 1 va dans le sac 1
+L'objet 4 de poid 2 va dans le sac 1
+L'objet 5 de poid 2 va dans le sac 1
+L'objet 6 de poid 2 va dans le sac 1
+L'objet 7 de poid 5 va dans le sac 2
+L'objet 8 de poid 5 va dans le sac 3
+L'objet 9 de poid 5 va dans le sac 4
+L'objet 10 de poid 5 va dans le sac 5
+L'objet 11 de poid 6 va dans le sac 6
+L'objet 12 de poid 8 va dans le sac 7
+---------POID---------
+le sac 0 a un poid 9
+le sac 1 a un poid 5
+le sac 2 a un poid 5
+le sac 3 a un poid 5
+le sac 4 a un poid 5
+le sac 5 a un poid 6
+le sac 6 a un poid 8
+nbr de sac = 7
+--online--
+HEURISTIQUE 1
+L'objet 1 de poid 5 va dans le sac 1
+L'objet 2 de poid 1 va dans le sac 1
+L'objet 3 de poid 2 va dans le sac 1
+L'objet 4 de poid 6 va dans le sac 2
+L'objet 5 de poid 5 va dans le sac 3
+L'objet 6 de poid 2 va dans le sac 3
+L'objet 7 de poid 5 va dans le sac 4
+L'objet 8 de poid 5 va dans le sac 5
+L'objet 9 de poid 2 va dans le sac 5
+L'objet 10 de poid 8 va dans le sac 6
+L'objet 11 de poid 1 va dans le sac 6
+L'objet 12 de poid 1 va dans le sac 7
+---------POID---------
+le sac 0 a un poid 8
+le sac 1 a un poid 6
+le sac 2 a un poid 7
+le sac 3 a un poid 5
+le sac 4 a un poid 7
+le sac 5 a un poid 9
+le sac 6 a un poid 1
+nbr de sac = 7
+HEURISTIQUE 2
+-------------------
+L'objet 1 de poid 5 va dans le sac 1
+L'objet 2 de poid 1 va dans le sac 1
+L'objet 3 de poid 2 va dans le sac 1
+L'objet 4 de poid 6 va dans le sac 2
+L'objet 5 de poid 5 va dans le sac 3
+L'objet 6 de poid 2 va dans le sac 2
+L'objet 7 de poid 5 va dans le sac 4
+L'objet 8 de poid 5 va dans le sac 5
+L'objet 9 de poid 2 va dans le sac 3
+L'objet 10 de poid 8 va dans le sac 6
+L'objet 11 de poid 1 va dans le sac 1
+L'objet 12 de poid 1 va dans le sac 2
+---------POID---------
+le sac 0 a un poid 9
+le sac 1 a un poid 9
+le sac 2 a un poid 7
+le sac 3 a un poid 5
+le sac 4 a un poid 5
+le sac 5 a un poid 8
+nbr de sac = 6
+HEURISTIQUE 3
+-------------------
+L'objet 1 de poid 5 va dans le sac 1
+L'objet 2 de poid 1 va dans le sac 1
+L'objet 3 de poid 2 va dans le sac 1
+L'objet 4 de poid 6 va dans le sac 2
+L'objet 5 de poid 5 va dans le sac 3
+L'objet 6 de poid 2 va dans le sac 2
+L'objet 7 de poid 5 va dans le sac 4
+L'objet 8 de poid 5 va dans le sac 5
+L'objet 9 de poid 2 va dans le sac 3
+L'objet 10 de poid 8 va dans le sac 6
+L'objet 11 de poid 1 va dans le sac 1
+L'objet 12 de poid 1 va dans le sac 2
+---------POID---------
+le sac 0 a un poid 9
+le sac 1 a un poid 9
+le sac 2 a un poid 7
+le sac 3 a un poid 5
+le sac 4 a un poid 5
+le sac 5 a un poid 8
+nbr de sac = 6

@@ -3,7 +3,7 @@ CFLAGS	= -Wall
 CFLAGS += -ansi
 CFLAGS += -pedantic
 CFLAGS  += -g
-MATH = -lm
+#MATH = -lm
 ###------------------------------
 ### Main targets
 ###------------------------------------------------------------
@@ -28,11 +28,11 @@ heuristique:sum.o partition.o heur.o heurTri.o heuristique.o
 # you may fill these lines with "make depend"
 # british_museum.o: british_museum.c british_museum.h
 
-heur.o:heur.h heur.c
+heur.o: heur.h heur.c
 heurTri.o:  heur.h heurTri.h heurTri.c
-heuristique.o:heurTri.h heur.h heuristique.c
-partition.o:heurTri.h heur.h partition.h
-sum.o:heurTri.h heur.h sum.h
+heuristique.o: heurTri.h heur.h heuristique.c
+partition.o: heurTri.h heur.h partition.h
+sum.o: heurTri.h heur.h sum.h
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< $(INCDIR)
