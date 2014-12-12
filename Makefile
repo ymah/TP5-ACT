@@ -8,31 +8,27 @@ CFLAGS  += -g
 ### Main targets
 ###------------------------------------------------------------
 BINARIES= heuristique
-#OBJECTS	= $(addsuffix .o,\
-	  drive mbr vol)
+OBJECTS	= $(addsuffix .o,\
+	  heur heurTri partition sum)
 
-all: $(BINARIES) #$(OBJECTS)
+all: $(BINARIES) $(OBJECTS)
 
 ###------------------------------
 ### Binaries
 ###------------------------------------------------------------
-# british_museum: british_museum.o
-# 	$(CC) $(CFLAGS) -o $@ $^ $(MATH)
-heuristique:sum.o partition.o heur.o heurTri.o heuristique.o
+heuristique: heuristique.o $(OBJECTS)
 	$(CC) $(CFLAGS) -o $@ $^ $(MATH)
-# %:%.o
-# 	$(CC) $(CFLAGS) -o $@ $< $(MATH)
+
 ###------------------------------
 ### #include dependences
 ###------------------------------------------------------------
 # you may fill these lines with "make depend"
-# british_museum.o: british_museum.c british_museum.h
 
 heur.o: heur.h heur.c
-heurTri.o:  heur.h heurTri.h heurTri.c
-heuristique.o: heurTri.h heur.h heuristique.c
-partition.o: heurTri.h heur.h partition.h
-sum.o: heurTri.h heur.h sum.h
+heurTri.o:  heurTri.c heur.h heurTri.h
+heuristique.o: heuristique.c heurTri.h heur.h partition.h sum.h
+partition.o: partition.c heurTri.h heur.h partition.h
+sum.o: sum.c sum.h partition.h
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< $(INCDIR)

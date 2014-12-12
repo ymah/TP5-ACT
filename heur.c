@@ -167,6 +167,7 @@ void getData(){
     printf("%d ",objet[i]);
     i++;
   }
+    printf("\n");
   getchar();
   getchar();
   getchar();

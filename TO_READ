@@ -2,9 +2,15 @@ RENDU Mahieddine Yaker - Nicolas Echallier
 
 Les 3 heuristique marchent en mode offline ou en mode online.
 Pour les lancer :
+
+!!!!!!!!!! il faut changer ça car mon code ne marchait pas du tout comme le tiens !!!!!!!!!!
 ./binPack -[mode] [path to data]
 
-
+------- Implémentaiton de SUM --------
+Implémentaiton de SUM avec l'heuristique 1 :
+lancer le code suivant : ./heuristique -sum [chiffre a trouver] < [données à trouver]
+Cette heuristique ne renvera pas toujours le bon résultat mais quelque fois ce sera le cas.
+ex : avec les objets 2 5 7 3 1 : il trouvera 7 mais pas 8
 
 Tests :
 ---------- EX1 ----------
@@ -534,3 +540,5 @@ le sac 3 a un poid 5
 le sac 4 a un poid 5
 le sac 5 a un poid 8
 nbr de sac = 6
+
+
