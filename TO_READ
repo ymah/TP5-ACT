@@ -1,25 +1,32 @@
 RENDU Mahieddine Yaker - Nicolas Echallier
 
-Les 3 heuristique marchent en mode offline ou en mode online.
+Les 3 heuristique marchent en mode trié ou en mode non-trié.
 Pour les lancer :
 
 !!!!!!!!!! il faut changer ça car mon code ne marchait pas du tout comme le tiens !!!!!!!!!!
 ./binPack -[mode] [path to data]
 
-------- Implémentaiton de SUM --------
+
+
+
+------- Implémentation de SUM --------
 Implémentaiton de SUM avec l'heuristique 1 :
 lancer le code suivant : ./heuristique -sum [chiffre a trouver] < [données à trouver]
-Cette heuristique ne renvera pas toujours le bon résultat mais quelque fois ce sera le cas.
-ex : avec les objets 2 5 7 3 1 : il trouvera 7 mais pas 8
+Cette heuristique ne renvera pas toujours le bon résultat mais dans un grand nombre de cas, ce le sera.
 
-Tests :
+
+
+------- Tests heuristique ------- 
+--- RESUME ---
+Nous avons découvert que en mode trié, les 3 heuristique se valent. Par contre, en mode non-trié, ce n'est pas le cas. Les 2 et 3 sont bien plus efficaces.
+
 ---------- EX1 ----------
 5 objets: 2 5 7 3 1
 3 sacs: 8 8 8
 Résumé :
-en mode offline, les 3 heuristique renvois les mêmes résultats
-en mode online, les heuristque 2 et 3 sont meilleures (elles remplissent les premiers sacs d'une meilleure manière) et elles les remplissent de la même manière.
---offline--
+en mode trié, les 3 heuristique renvois les mêmes résultats
+en mode non-trié, les heuristque 2 et 3 sont meilleures (elles remplissent les premiers sacs d'une meilleure manière) et elles les remplissent de la même manière.
+--trié--
 HEURISTIQUE 1
 L'objet 1 de poid 1 va dans le sac 1
 L'objet 2 de poid 2 va dans le sac 1
@@ -56,7 +63,7 @@ le sac 1 a un poid 5
 le sac 2 a un poid 7
 nbr de sac = 3
 ------------------------------------
---online--
+--non-trié--
 HEURISTIQUE 1
 L'objet 1 de poid 2 va dans le sac 1
 L'objet 2 de poid 5 va dans le sac 1
@@ -96,9 +103,9 @@ nbr de sac = 3
 5 objets: 3 5 7 3 3
 3 sacs: 7 7 7
 Résumé :
-en mode offline, les 3 heuristique renvois les mêmes résultats
-en mode online, les heuristque 2 et 3 sont meilleures (elles remplissent les premiers sacs d'une meilleure manière) et elles les remplissent de la même manière.
---offline--
+en mode trié, les 3 heuristique renvois les mêmes résultats
+en mode non-trié, les heuristque 2 et 3 sont meilleures (elles remplissent les premiers sacs d'une meilleure manière) et elles les remplissent de la même manière.
+--trié--
 HEURISTIQUE 1
 L'objet 1 de poid 3 va dans le sac 1
 L'objet 2 de poid 3 va dans le sac 1
@@ -137,7 +144,7 @@ le sac 1 a un poid 3
 le sac 2 a un poid 5
 le sac 3 a un poid 7
 nbr de sac = 4
---online--
+--non-trié--
 HEURISTIQUE 1
 L'objet 1 de poid 3 va dans le sac 1
 L'objet 2 de poid 5 va dans le sac 2
@@ -180,9 +187,9 @@ nbr de sac = 4
 8 objets: 2 6 5 2 5 5 2 8
 4 sacs: 9 9 9 9
 Résumé :
-en mode offline, les 3 heuristique renvois les mêmes résultats
-en mode online, les heuristque 2 et 3 sont meilleures et équivalente.
---offline--
+en mode trié, les 3 heuristique renvois les mêmes résultats
+en mode non-trié, les heuristque 2 et 3 sont meilleures et équivalente.
+--trié--
 HEURISTIQUE 1
 L'objet 1 de poid 2 va dans le sac 1
 L'objet 2 de poid 2 va dans le sac 1
@@ -236,7 +243,7 @@ le sac 3 a un poid 5
 le sac 4 a un poid 6
 le sac 5 a un poid 8
 nbr de sac = 6
---online--
+--non-trié--
 HEURISTIQUE 1
 L'objet 1 de poid 2 va dans le sac 1
 L'objet 2 de poid 6 va dans le sac 1
@@ -291,9 +298,9 @@ nbr de sac = 5
 8 objets: 2 6 5 2 5 5 2 8
 5 sacs: 8 8 8 8 8
 Résumé :
-en mode offline, les 3 heuristique renvois les mêmes résultats
-en mode online, les heuristque 2 et 3 sont meilleures et équivalente.
---offline--
+en mode trié, les 3 heuristique renvois les mêmes résultats
+en mode non-trié, les heuristque 2 et 3 sont meilleures et équivalente.
+--trié--
 HEURISTIQUE 1
 L'objet 1 de poid 2 va dans le sac 1
 L'objet 2 de poid 2 va dans le sac 1
@@ -347,7 +354,7 @@ le sac 3 a un poid 5
 le sac 4 a un poid 6
 le sac 5 a un poid 8
 nbr de sac = 6
---online--
+--non-trié--
 HEURISTIQUE 1
 L'objet 1 de poid 2 va dans le sac 1
 L'objet 2 de poid 6 va dans le sac 1
@@ -402,9 +409,9 @@ nbr de sac = 5
 12 objets: 5 1 2 6 5 2 5 5 2 8 1 1
 5 sacs: 9 9 9 9 9
 Résumé :
-en mode offline, les 3 heuristique renvois les mêmes résultats
-en mode online, les heuristque 2 et 3 sont meilleures et équivalente.
---offline--
+en mode trié, les 3 heuristique renvois les mêmes résultats
+en mode non-trié, les heuristque 2 et 3 sont meilleures et équivalente.
+--trié--
 HEURISTIQUE 1
 L'objet 1 de poid 1 va dans le sac 1
 L'objet 2 de poid 1 va dans le sac 1
@@ -473,7 +480,7 @@ le sac 4 a un poid 5
 le sac 5 a un poid 6
 le sac 6 a un poid 8
 nbr de sac = 7
---online--
+--non-trié--
 HEURISTIQUE 1
 L'objet 1 de poid 5 va dans le sac 1
 L'objet 2 de poid 1 va dans le sac 1

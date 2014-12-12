@@ -5,7 +5,7 @@
 #include "heur.h"
 #include "partition.h"
 #include "sum.h"
-
+#include "colors.h"
 
 
 int
@@ -19,16 +19,16 @@ main(int argc, char *argv[]) {
       getData();
 
       if(sumHeuristique1(objet, atoi(argv[2]))) {
-	printf("Le nombre %d peut être calculé en faisant une somme des objets\n", atoi(argv[2]));
+	printf(GREEN "Le nombre %d peut être calculé en faisant une somme des objets\n" RESET, atoi(argv[2]));
 	return 0;
       }
       else {
-	printf("Le nombre %d ne peut être calculé en faisant une somme des objets\n", atoi(argv[2]));
+	printf(RED "Le nombre %d ne peut être calculé en faisant une somme des objets\n" RESET, atoi(argv[2]));
 	return 0;
       }
     }
     else {
-      printf("Le programme avec l'attribut -sum prend 2 paramètres : l'attribut -sum et un entier cible. Veuillez entrer les bon paramètres\n");
+      printf(RED "Le programme avec l'attribut -sum prend 2 paramètres : " BOLDRED "l'attribut -sum et un entier cible." RESET RED " Veuillez entrer les bon paramètres\n" RESET);
       return 0;
     }
   }

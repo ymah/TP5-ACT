@@ -26,9 +26,9 @@ heuristique: heuristique.o $(OBJECTS)
 
 heur.o: heur.h heur.c
 heurTri.o:  heurTri.c heur.h heurTri.h
-heuristique.o: heuristique.c heurTri.h heur.h partition.h sum.h
+heuristique.o: heuristique.c heurTri.h heur.h partition.h sum.h colors.h
 partition.o: partition.c heurTri.h heur.h partition.h
-sum.o: sum.c sum.h partition.h
+sum.o: sum.c sum.h partition.h colors.h
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< $(INCDIR)
