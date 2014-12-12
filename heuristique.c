@@ -12,6 +12,6 @@
 int main(){
 
   printf("\nPartition \n");
-  partition();
+  heuristiqueNonTrie();
   return 0;
 }
