@@ -2,10 +2,10 @@ CC	= gcc
 CFLAGS	= -Wall
 CFLAGS += -ansi
 CFLAGS += -pedantic
-CFLAGS  += -g 
+CFLAGS  += -g
 MATH = -lm
 ###------------------------------
-### Main targets 
+### Main targets
 ###------------------------------------------------------------
 BINARIES= heuristique
 #OBJECTS	= $(addsuffix .o,\
@@ -22,10 +22,10 @@ heuristique:partition.o heur.o heurTri.o heuristique.o
 	$(CC) $(CFLAGS) -o $@ $^ $(MATH)
 
 ###------------------------------
-### #include dependences 
+### #include dependences
 ###------------------------------------------------------------
 # you may fill these lines with "make depend"
-# british_museum.o: british_museum.c british_museum.h 
+# british_museum.o: british_museum.c british_museum.h
 
 heur.o:heur.h heur.c
 heurTri.o:  heur.h heurTri.h heurTri.c
@@ -39,9 +39,9 @@ partition.o:heurTri.h heur.h partition.h
 ###------------------------------------------------------------
 .PHONY: clean realclean depend
 clean:
-	$(RM) *.o $(BINARIES)
-realclean: clean 
+	$(RM) *#* *.o $(BINARIES)
+realclean: clean
 	$(RM)
-depend : 
+depend :
 	$(CC) -MM $(INCDIR) *.c
 

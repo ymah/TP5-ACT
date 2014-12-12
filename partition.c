@@ -13,7 +13,7 @@ int partition(){
   getData();
   sac = calloc(nobjet,sizeof(int));
   res = calloc(nobjet,sizeof(int));
-  cap = 4;
+
   courant = 0;
   printf("\n----------------------\n");
   /* for(i=0;i<nobjet;i++) */
