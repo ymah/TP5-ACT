@@ -138,19 +138,29 @@ void getData(){
 
   if((c=getchar()) == EOF)
     exit(EXIT_FAILURE);
-  nobjet =c -'0';
+  nobjet = c -'0';
+  c=getchar();
+  if(c!=10){
+    nobjet *= 10;
+    nobjet+= c -'0';
+  }
   printf("\nNombre d'objets : %d\n",nobjet);
   objet = calloc(nobjet,sizeof(int));
 
   while(i!=nobjet){
-    if((c=getchar()) == EOF)
-      exit(EXIT_FAILURE);
-    if(c==10 || c==32)
-      continue;
-
-    objet[i]= c - '0';
-    printf("%d ",objet[i]);
-    i++;
+    switch(c=getchar()){
+    case 10:
+    case 32:
+      break;
+    default :
+      if(objet[i] != 0)
+        objet[i] = objet[i]*10 + (c - '0');
+      else
+        objet[i] = (c - '0');
+      printf("%d ",objet[i]);
+      i++;
+    break;
+    }
   }
   getchar();
   getchar();
