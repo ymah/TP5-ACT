@@ -1,7 +1,7 @@
-int *objet;
-int nobjet;
-int *sac;
-int courant;
+int *objet; /* liste des objets */
+int nobjet; /* nbr des objets */
+int *sac; /* liste des sacs */
+int courant; 
 int *res;
 int cap;
 
