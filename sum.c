@@ -35,8 +35,6 @@ int sumHeuristique1Bis(int *objet, int s) {
   return 0;
 }
 
-
-
 int checkDigit(char * digit) {
   int i = 0;
   while(digit[i] != '\0') {

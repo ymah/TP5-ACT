@@ -11,7 +11,7 @@
 int
 main(int argc, char *argv[]) {
 
-  /* MAH :  j'ai fait ça pour ne pas interférer avec ton code. Et puis c'est plus facile à utiliser pour tester. */  
+  /* MAH :  j'ai fait ça pour ne pas interférer avec ton code. Et puis c'est plus facile à utiliser pour tester. */
 /* si on a 3 arguments (en gros, que l'on utilise sum) */
   if(argc == 3) {
     /* on verifie que l'argument 1 est -sum et que le deuxième argument est bien un nombre */
@@ -33,8 +33,8 @@ main(int argc, char *argv[]) {
     }
   }
 
-  
-  printf("\nPartition \n");  
+
+  printf("\nPartition \n");
   heuristiqueNonTrie();
 
   return 0;
