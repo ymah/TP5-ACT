@@ -24,8 +24,8 @@ heuristique: heuristique.o $(OBJECTS)
 ###------------------------------------------------------------
 # you may fill these lines with "make depend"
 
-heur.o: heur.h heur.c
-heurTri.o:  heurTri.c heur.h heurTri.h
+heur.o: heur.h heur.c colors.h
+heurTri.o:  heurTri.c heur.h heurTri.h colors.h
 heuristique.o: heuristique.c heurTri.h heur.h partition.h sum.h colors.h
 partition.o: partition.c heurTri.h heur.h partition.h
 sum.o: sum.c sum.h partition.h colors.h

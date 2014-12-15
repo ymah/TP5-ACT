@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "heur.h"
-
+#include "colors.h"
 
 void heuristiqueNonTrie(){
   int i;
@@ -11,31 +11,28 @@ void heuristiqueNonTrie(){
 
   courant = 0;
 
-  /* MAH : j'ai commenté tout ça pour que tu vois le problème en sortie */
+  printf("\n----------------------\n");
+  for(i=0;i<nobjet;i++)
+    if(objet[i] > cap){
+      printf("les objets sont trop gros pour les sacs");
+      return ;
+    }
+  heuristique1(objet,nobjet,sac,cap);
+  printf(BOLDWHITE "Heuristique 1" RESET "- Capacité de chaque sac %d\n",cap);
+  for(i=0;i<nobjet;i++){
+    printf("le %d eme de poids %d dans le sac %d\n",i+1,objet[i],res[i]+1);
+  }
+  printf("\n----------------------\n");
 
-
-  /* printf("\n----------------------\n"); */
-  /* for(i=0;i<nobjet;i++) */
-  /*   if(objet[i] > cap){ */
-  /*     printf("les objets sont trop gros pour les sacs"); */
-  /*     return ; */
-  /*   } */
-  /* heuristique1(objet,nobjet,sac,cap); */
-  /* printf("Heuristique 1- Capacité de chaque sac %d\n",cap); */
-  /* for(i=0;i<nobjet;i++){ */
-  /*   printf("le %d eme de poids %d dans le sac %d\n",i+1,objet[i],res[i]+1); */
-  /* } */
-  /* printf("\n----------------------\n"); */
-
-  /* heuristique2(objet,nobjet,sac,cap); */
-  /* printf("Heuristique 2- Capacité de chaque sac %d\n",cap); */
-  /* for(i=0;i<nobjet;i++){ */
-  /*   printf("le %d eme de poids %d dans le sac %d\n",i+1,objet[i],res[i]+1); */
-  /* } */
-  /* printf("\n----------------------\n"); */
+  heuristique2(objet,nobjet,sac,cap);
+  printf(BOLDWHITE "Heuristique 2- " RESET "Capacité de chaque sac %d\n",cap);
+  for(i=0;i<nobjet;i++){
+    printf("le %d eme de poids %d dans le sac %d\n",i+1,objet[i],res[i]+1);
+  }
+  printf("\n----------------------\n");
 
   heuristique3(objet,nobjet,sac,cap);
-  printf("Heuristique 3- Capacité de chaque sac %d\n",cap);
+  printf(BOLDWHITE "Heuristique 3- " RESET "Capacité de chaque sac %d\n",cap);
   for(i=0;i<nobjet;i++){
     printf("le %d eme de poids %d dans le sac %d\n",i+1,objet[i],res[i]+1);
   }

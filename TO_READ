@@ -1,17 +1,17 @@
 RENDU Mahieddine Yaker - Nicolas Echallier
 
 Les 3 heuristique marchent en mode trié ou en mode non-trié.
-Pour les lancer :
-
-!!!!!!!!!! il faut changer ça car mon code ne marchait pas du tout comme le tiens !!!!!!!!!!
-./binPack -[mode] [path to data]
-
-
+Nous imprimons les résulats de chaque heuristique d'un coup.
+Utilisation : 
+./heuristique -[mode] < [path to data]
+ex : 
+./heuristique -trie < donnees/data_BinPack/exemple1
+./heuristique -nonTrie < donnees/data_BinPack/exemple1
 
 
 ------- Implémentation de SUM --------
 Implémentaiton de SUM avec l'heuristique 1 :
-lancer le code suivant : ./heuristique -sum [chiffre a trouver] < [données à trouver]
+Lancer le code suivant : ./heuristique -sum [chiffre a trouver] < [données à trouver]
 Cette heuristique ne renvera pas toujours le bon résultat mais dans un grand nombre de cas, ce le sera.
 
 
