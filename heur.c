@@ -118,7 +118,7 @@ int heuristique3(int *objet,int o_size,int *lsac,int cap_s){
     ok=fort=0;
     for(j=0;j<=cptSac;j++)
       if(lsac[fort] < lsac[j] && lsac[j] - objet[i] >= 0 )
-          fort =j;
+        fort =j;
     if((lsac[fort] - objet[i]) >= 0 ){
       lsac[fort] -= objet[i];
       ok=1;
@@ -141,27 +141,36 @@ void getData(){
   char c;
   int i;
   i=0;
-  if((c=getchar()) == EOF)
-    exit(EXIT_FAILURE);
-  nobjet =c -'0';
-  if((c=getchar()) != 10){
+  while(1){
+    c = getchar();
+    if(c == '\r')
+      break;
     nobjet *= 10;
-    nobjet+= c - '0';
+    nobjet += c -'0' ;
+
   }
-  printf("\nNombre d'objets : %d\n",nobjet);
+  getchar();
+  printf("%d \n", nobjet);
+  while(1){
+    c = getchar();
+    if(c == '\r')
+      break;
+    cap *= 10;
+    cap += c -'0' ;
+  }
+  printf("%d \n", cap);
   objet = calloc(nobjet,sizeof(int));
-  while(i!=nobjet){
-    if((c=getchar()) == EOF)
-      exit(EXIT_FAILURE);
-    if(c==10 || c==32)
-      continue;
-    objet[i]= c - '0';
-    printf("%d ",objet[i]);
-    i++;
+  getchar();
+  for(i=0;i<nobjet;i++){
+    while(1){
+      c = getchar();
+      if(c == '\r')
+        break;
+      objet[i] *= 10;
+      objet[i] += c -'0' ;
+    }
+    getchar();
+    printf("%d \n", objet[i]);
   }
   printf("\n");
-  getchar();
-  getchar();
-  getchar();
-  cap = getchar() - '0';
 }
