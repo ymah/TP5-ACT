@@ -114,7 +114,7 @@ int heuristique3(int *objet,int o_size,int *lsac,int cap_s){
   for(i=0;i<o_size;i++){
     ok=fort=0;
     for(j=0;j<=cptSac;j++)
-      if(lsac[fort] < lsac[j] && lsac[j] - objet[i] >= 0 )
+      if(lsac[fort] > lsac[j] && lsac[j] - objet[i] >= 0 )
         fort =j;
     if((lsac[fort] - objet[i]) >= 0 ){
       lsac[fort] -= objet[i];
@@ -134,40 +134,74 @@ int heuristique3(int *objet,int o_size,int *lsac,int cap_s){
 
 
 
+/* void getData(){ */
+/*   char c; */
+/*   int i; */
+/*   i=0; */
+/*   while(1){ */
+/*     c = getchar(); */
+/*     if(c == '\r') */
+/*       break; */
+/*     nobjet *= 10; */
+/*     nobjet += c -'0' ; */
+
+/*   } */
+/*   getchar(); */
+/*   printf("%d \n", nobjet); */
+/*   while(1){ */
+/*     c = getchar(); */
+/*     if(c == '\r') */
+/*       break; */
+/*     cap *= 10; */
+/*     cap += c -'0' ; */
+/*   } */
+/*   printf("%d \n", cap); */
+/*   objet = calloc(nobjet,sizeof(int)); */
+/*   getchar(); */
+/*   for(i=0;i<nobjet;i++){ */
+/*     while(1){ */
+/*       c = getchar(); */
+/*       if(c == '\r') */
+/*         break; */
+/*       objet[i] *= 10; */
+/*       objet[i] += c -'0' ; */
+/*     } */
+/*     getchar(); */
+/*     printf("%d \n", objet[i]); */
+/*   } */
+/*   printf("\n"); */
+
+/* } */
+
+
+
+
+
 void getData(){
   char c;
   int i;
   i=0;
-  while(1){
-    c = getchar();
-    if(c == '\r')
-      break;
+  if((c=getchar()) == EOF)
+    exit(EXIT_FAILURE);
+  nobjet =c -'0';
+  if((c=getchar()) != 10){
     nobjet *= 10;
-    nobjet += c -'0' ;
-
+    nobjet+= c - '0';
   }
-  getchar();
-  printf("%d \n", nobjet);
-  while(1){
-    c = getchar();
-    if(c == '\r')
-      break;
-    cap *= 10;
-    cap += c -'0' ;
-  }
-  printf("%d \n", cap);
+  printf("\nNombre d'objets : %d\n",nobjet);
   objet = calloc(nobjet,sizeof(int));
-  getchar();
-  for(i=0;i<nobjet;i++){
-    while(1){
-      c = getchar();
-      if(c == '\r')
-        break;
-      objet[i] *= 10;
-      objet[i] += c -'0' ;
-    }
-    getchar();
-    printf("%d \n", objet[i]);
+  while(i!=nobjet){
+    if((c=getchar()) == EOF)
+      exit(EXIT_FAILURE);
+    if(c==10 || c==32)
+      continue;
+    objet[i]= c - '0';
+    printf("%d ",objet[i]);
+    i++;
   }
   printf("\n");
+  getchar();
+  getchar();
+  getchar();
+  cap = getchar() - '0';
 }

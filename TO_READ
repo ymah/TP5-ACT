@@ -18,534 +18,208 @@ Cette heuristique ne renvera pas toujours le bon résultat mais dans un grand no
 
 ------- Tests heuristique ------- 
 --- RESUME ---
-Nous avons découvert que en mode trié, les 3 heuristique se valent. Par contre, en mode non-trié, ce n'est pas le cas. Les 2 et 3 sont bien plus efficaces.
+En mode trié :
+Nous constatons que l'heuristique2 est la plus optimale, que l'heuristique 1 fonctionne en donnant un resultat correct.
+Par contre, l'heuristique 3 a des resultat qui sont "saccivore".
 
----------- EX1 ----------
-5 objets: 2 5 7 3 1
-3 sacs: 8 8 8
-Résumé :
-en mode trié, les 3 heuristique renvois les mêmes résultats
-en mode non-trié, les heuristque 2 et 3 sont meilleures (elles remplissent les premiers sacs d'une meilleure manière) et elles les remplissent de la même manière.
---trié--
-HEURISTIQUE 1
-L'objet 1 de poid 1 va dans le sac 1
-L'objet 2 de poid 2 va dans le sac 1
-L'objet 3 de poid 3 va dans le sac 1
-L'objet 4 de poid 5 va dans le sac 2
-L'objet 5 de poid 7 va dans le sac 3
----------POID---------
-le sac 0 a un poid 6
-le sac 1 a un poid 5
-le sac 2 a un poid 7
-nbr de sac = 3
-HEURISTIQUE 2
--------------------
-L'objet 1 de poid 1 va dans le sac 1
-L'objet 2 de poid 2 va dans le sac 1
-L'objet 3 de poid 3 va dans le sac 1
-L'objet 4 de poid 5 va dans le sac 2
-L'objet 5 de poid 7 va dans le sac 3
----------POID---------
-le sac 0 a un poid 6
-le sac 1 a un poid 5
-le sac 2 a un poid 7
-nbr de sac = 3
-HEURISTIQUE 3
--------------------
-L'objet 1 de poid 1 va dans le sac 1
-L'objet 2 de poid 2 va dans le sac 1
-L'objet 3 de poid 3 va dans le sac 1
-L'objet 4 de poid 5 va dans le sac 2
-L'objet 5 de poid 7 va dans le sac 3
----------POID---------
-le sac 0 a un poid 6
-le sac 1 a un poid 5
-le sac 2 a un poid 7
-nbr de sac = 3
-------------------------------------
---non-trié--
-HEURISTIQUE 1
-L'objet 1 de poid 2 va dans le sac 1
-L'objet 2 de poid 5 va dans le sac 1
-L'objet 3 de poid 7 va dans le sac 2
-L'objet 4 de poid 3 va dans le sac 3
-L'objet 5 de poid 1 va dans le sac 3
----------POID---------
-le sac 0 a un poid 7
-le sac 1 a un poid 7
-le sac 2 a un poid 4
-nbr de sac = 3
-HEURISTIQUE 2
--------------------
-L'objet 1 de poid 2 va dans le sac 1
-L'objet 2 de poid 5 va dans le sac 1
-L'objet 3 de poid 7 va dans le sac 2
-L'objet 4 de poid 3 va dans le sac 3
-L'objet 5 de poid 1 va dans le sac 1
----------POID---------
-le sac 0 a un poid 8
-le sac 1 a un poid 7
-le sac 2 a un poid 3
-nbr de sac = 3
-HEURISTIQUE 3
--------------------
-L'objet 1 de poid 2 va dans le sac 1
-L'objet 2 de poid 5 va dans le sac 1
-L'objet 3 de poid 7 va dans le sac 2
-L'objet 4 de poid 3 va dans le sac 3
-L'objet 5 de poid 1 va dans le sac 1
----------POID---------
-le sac 0 a un poid 8
-le sac 1 a un poid 7
-le sac 2 a un poid 3
-nbr de sac = 3
----------- EX2 ----------
-5 objets: 3 5 7 3 3
-3 sacs: 7 7 7
-Résumé :
-en mode trié, les 3 heuristique renvois les mêmes résultats
-en mode non-trié, les heuristque 2 et 3 sont meilleures (elles remplissent les premiers sacs d'une meilleure manière) et elles les remplissent de la même manière.
---trié--
-HEURISTIQUE 1
-L'objet 1 de poid 3 va dans le sac 1
-L'objet 2 de poid 3 va dans le sac 1
-L'objet 3 de poid 3 va dans le sac 2
-L'objet 4 de poid 5 va dans le sac 3
-L'objet 5 de poid 7 va dans le sac 4
----------POID---------
-le sac 0 a un poid 6
-le sac 1 a un poid 3
-le sac 2 a un poid 5
-le sac 3 a un poid 7
-nbr de sac = 4
-HEURISTIQUE 2
--------------------
-L'objet 1 de poid 3 va dans le sac 1
-L'objet 2 de poid 3 va dans le sac 1
-L'objet 3 de poid 3 va dans le sac 2
-L'objet 4 de poid 5 va dans le sac 3
-L'objet 5 de poid 7 va dans le sac 4
----------POID---------
-le sac 0 a un poid 6
-le sac 1 a un poid 3
-le sac 2 a un poid 5
-le sac 3 a un poid 7
-nbr de sac = 4
-HEURISTIQUE 3
--------------------
-L'objet 1 de poid 3 va dans le sac 1
-L'objet 2 de poid 3 va dans le sac 1
-L'objet 3 de poid 3 va dans le sac 2
-L'objet 4 de poid 5 va dans le sac 3
-L'objet 5 de poid 7 va dans le sac 4
----------POID---------
-le sac 0 a un poid 6
-le sac 1 a un poid 3
-le sac 2 a un poid 5
-le sac 3 a un poid 7
-nbr de sac = 4
---non-trié--
-HEURISTIQUE 1
-L'objet 1 de poid 3 va dans le sac 1
-L'objet 2 de poid 5 va dans le sac 2
-L'objet 3 de poid 7 va dans le sac 3
-L'objet 4 de poid 3 va dans le sac 4
-L'objet 5 de poid 3 va dans le sac 4
----------POID---------
-le sac 0 a un poid 3
-le sac 1 a un poid 5
-le sac 2 a un poid 7
-le sac 3 a un poid 6
-nbr de sac = 4
-HEURISTIQUE 2
--------------------
-L'objet 1 de poid 3 va dans le sac 1
-L'objet 2 de poid 5 va dans le sac 2
-L'objet 3 de poid 7 va dans le sac 3
-L'objet 4 de poid 3 va dans le sac 1
-L'objet 5 de poid 3 va dans le sac 4
----------POID---------
-le sac 0 a un poid 6
-le sac 1 a un poid 5
-le sac 2 a un poid 7
-le sac 3 a un poid 3
-nbr de sac = 4
-HEURISTIQUE 3
--------------------
-L'objet 1 de poid 3 va dans le sac 1
-L'objet 2 de poid 5 va dans le sac 2
-L'objet 3 de poid 7 va dans le sac 3
-L'objet 4 de poid 3 va dans le sac 1
-L'objet 5 de poid 3 va dans le sac 4
----------POID---------
-le sac 0 a un poid 6
-le sac 1 a un poid 5
-le sac 2 a un poid 7
-le sac 3 a un poid 3
-nbr de sac = 4
----------- EX3 ----------
-8 objets: 2 6 5 2 5 5 2 8
-4 sacs: 9 9 9 9
-Résumé :
-en mode trié, les 3 heuristique renvois les mêmes résultats
-en mode non-trié, les heuristque 2 et 3 sont meilleures et équivalente.
---trié--
-HEURISTIQUE 1
-L'objet 1 de poid 2 va dans le sac 1
-L'objet 2 de poid 2 va dans le sac 1
-L'objet 3 de poid 2 va dans le sac 1
-L'objet 4 de poid 5 va dans le sac 2
-L'objet 5 de poid 5 va dans le sac 3
-L'objet 6 de poid 5 va dans le sac 4
-L'objet 7 de poid 6 va dans le sac 5
-L'objet 8 de poid 8 va dans le sac 6
----------POID---------
-le sac 0 a un poid 6
-le sac 1 a un poid 5
-le sac 2 a un poid 5
-le sac 3 a un poid 5
-le sac 4 a un poid 6
-le sac 5 a un poid 8
-nbr de sac = 6
-HEURISTIQUE 2
--------------------
-L'objet 1 de poid 2 va dans le sac 1
-L'objet 2 de poid 2 va dans le sac 1
-L'objet 3 de poid 2 va dans le sac 1
-L'objet 4 de poid 5 va dans le sac 2
-L'objet 5 de poid 5 va dans le sac 3
-L'objet 6 de poid 5 va dans le sac 4
-L'objet 7 de poid 6 va dans le sac 5
-L'objet 8 de poid 8 va dans le sac 6
----------POID---------
-le sac 0 a un poid 6
-le sac 1 a un poid 5
-le sac 2 a un poid 5
-le sac 3 a un poid 5
-le sac 4 a un poid 6
-le sac 5 a un poid 8
-nbr de sac = 6
-HEURISTIQUE 3
--------------------
-L'objet 1 de poid 2 va dans le sac 1
-L'objet 2 de poid 2 va dans le sac 1
-L'objet 3 de poid 2 va dans le sac 1
-L'objet 4 de poid 5 va dans le sac 2
-L'objet 5 de poid 5 va dans le sac 3
-L'objet 6 de poid 5 va dans le sac 4
-L'objet 7 de poid 6 va dans le sac 5
-L'objet 8 de poid 8 va dans le sac 6
----------POID---------
-le sac 0 a un poid 6
-le sac 1 a un poid 5
-le sac 2 a un poid 5
-le sac 3 a un poid 5
-le sac 4 a un poid 6
-le sac 5 a un poid 8
-nbr de sac = 6
---non-trié--
-HEURISTIQUE 1
-L'objet 1 de poid 2 va dans le sac 1
-L'objet 2 de poid 6 va dans le sac 1
-L'objet 3 de poid 5 va dans le sac 2
-L'objet 4 de poid 2 va dans le sac 2
-L'objet 5 de poid 5 va dans le sac 3
-L'objet 6 de poid 5 va dans le sac 4
-L'objet 7 de poid 2 va dans le sac 4
-L'objet 8 de poid 8 va dans le sac 5
----------POID---------
-le sac 0 a un poid 8
-le sac 1 a un poid 7
-le sac 2 a un poid 5
-le sac 3 a un poid 7
-le sac 4 a un poid 8
-nbr de sac = 5
-HEURISTIQUE 2
--------------------
-L'objet 1 de poid 2 va dans le sac 1
-L'objet 2 de poid 6 va dans le sac 1
-L'objet 3 de poid 5 va dans le sac 2
-L'objet 4 de poid 2 va dans le sac 2
-L'objet 5 de poid 5 va dans le sac 3
-L'objet 6 de poid 5 va dans le sac 4
-L'objet 7 de poid 2 va dans le sac 2
-L'objet 8 de poid 8 va dans le sac 5
----------POID---------
-le sac 0 a un poid 8
-le sac 1 a un poid 9
-le sac 2 a un poid 5
-le sac 3 a un poid 5
-le sac 4 a un poid 8
-nbr de sac = 5
-HEURISTIQUE 3
--------------------
-L'objet 1 de poid 2 va dans le sac 1
-L'objet 2 de poid 6 va dans le sac 1
-L'objet 3 de poid 5 va dans le sac 2
-L'objet 4 de poid 2 va dans le sac 2
-L'objet 5 de poid 5 va dans le sac 3
-L'objet 6 de poid 5 va dans le sac 4
-L'objet 7 de poid 2 va dans le sac 2
-L'objet 8 de poid 8 va dans le sac 5
----------POID---------
-le sac 0 a un poid 8
-le sac 1 a un poid 9
-le sac 2 a un poid 5
-le sac 3 a un poid 5
-le sac 4 a un poid 8
-nbr de sac = 5
----------- EX4 ----------
-8 objets: 2 6 5 2 5 5 2 8
-5 sacs: 8 8 8 8 8
-Résumé :
-en mode trié, les 3 heuristique renvois les mêmes résultats
-en mode non-trié, les heuristque 2 et 3 sont meilleures et équivalente.
---trié--
-HEURISTIQUE 1
-L'objet 1 de poid 2 va dans le sac 1
-L'objet 2 de poid 2 va dans le sac 1
-L'objet 3 de poid 2 va dans le sac 1
-L'objet 4 de poid 5 va dans le sac 2
-L'objet 5 de poid 5 va dans le sac 3
-L'objet 6 de poid 5 va dans le sac 4
-L'objet 7 de poid 6 va dans le sac 5
-L'objet 8 de poid 8 va dans le sac 6
----------POID---------
-le sac 0 a un poid 6
-le sac 1 a un poid 5
-le sac 2 a un poid 5
-le sac 3 a un poid 5
-le sac 4 a un poid 6
-le sac 5 a un poid 8
-nbr de sac = 6
-HEURISTIQUE 2
--------------------
-L'objet 1 de poid 2 va dans le sac 1
-L'objet 2 de poid 2 va dans le sac 1
-L'objet 3 de poid 2 va dans le sac 1
-L'objet 4 de poid 5 va dans le sac 2
-L'objet 5 de poid 5 va dans le sac 3
-L'objet 6 de poid 5 va dans le sac 4
-L'objet 7 de poid 6 va dans le sac 5
-L'objet 8 de poid 8 va dans le sac 6
----------POID---------
-le sac 0 a un poid 6
-le sac 1 a un poid 5
-le sac 2 a un poid 5
-le sac 3 a un poid 5
-le sac 4 a un poid 6
-le sac 5 a un poid 8
-nbr de sac = 6
-HEURISTIQUE 3
--------------------
-L'objet 1 de poid 2 va dans le sac 1
-L'objet 2 de poid 2 va dans le sac 1
-L'objet 3 de poid 2 va dans le sac 1
-L'objet 4 de poid 5 va dans le sac 2
-L'objet 5 de poid 5 va dans le sac 3
-L'objet 6 de poid 5 va dans le sac 4
-L'objet 7 de poid 6 va dans le sac 5
-L'objet 8 de poid 8 va dans le sac 6
----------POID---------
-le sac 0 a un poid 6
-le sac 1 a un poid 5
-le sac 2 a un poid 5
-le sac 3 a un poid 5
-le sac 4 a un poid 6
-le sac 5 a un poid 8
-nbr de sac = 6
---non-trié--
-HEURISTIQUE 1
-L'objet 1 de poid 2 va dans le sac 1
-L'objet 2 de poid 6 va dans le sac 1
-L'objet 3 de poid 5 va dans le sac 2
-L'objet 4 de poid 2 va dans le sac 2
-L'objet 5 de poid 5 va dans le sac 3
-L'objet 6 de poid 5 va dans le sac 4
-L'objet 7 de poid 2 va dans le sac 4
-L'objet 8 de poid 8 va dans le sac 5
----------POID---------
-le sac 0 a un poid 8
-le sac 1 a un poid 7
-le sac 2 a un poid 5
-le sac 3 a un poid 7
-le sac 4 a un poid 8
-nbr de sac = 5
-HEURISTIQUE 2
--------------------
-L'objet 1 de poid 2 va dans le sac 1
-L'objet 2 de poid 6 va dans le sac 1
-L'objet 3 de poid 5 va dans le sac 2
-L'objet 4 de poid 2 va dans le sac 2
-L'objet 5 de poid 5 va dans le sac 3
-L'objet 6 de poid 5 va dans le sac 4
-L'objet 7 de poid 2 va dans le sac 3
-L'objet 8 de poid 8 va dans le sac 5
----------POID---------
-le sac 0 a un poid 8
-le sac 1 a un poid 7
-le sac 2 a un poid 7
-le sac 3 a un poid 5
-le sac 4 a un poid 8
-nbr de sac = 5
-HEURISTIQUE 3
--------------------
-L'objet 1 de poid 2 va dans le sac 1
-L'objet 2 de poid 6 va dans le sac 1
-L'objet 3 de poid 5 va dans le sac 2
-L'objet 4 de poid 2 va dans le sac 2
-L'objet 5 de poid 5 va dans le sac 3
-L'objet 6 de poid 5 va dans le sac 4
-L'objet 7 de poid 2 va dans le sac 3
-L'objet 8 de poid 8 va dans le sac 5
----------POID---------
-le sac 0 a un poid 8
-le sac 1 a un poid 7
-le sac 2 a un poid 7
-le sac 3 a un poid 5
-le sac 4 a un poid 8
-nbr de sac = 5
----------- EX5 ----------
-12 objets: 5 1 2 6 5 2 5 5 2 8 1 1
-5 sacs: 9 9 9 9 9
-Résumé :
-en mode trié, les 3 heuristique renvois les mêmes résultats
-en mode non-trié, les heuristque 2 et 3 sont meilleures et équivalente.
---trié--
-HEURISTIQUE 1
-L'objet 1 de poid 1 va dans le sac 1
-L'objet 2 de poid 1 va dans le sac 1
-L'objet 3 de poid 1 va dans le sac 1
-L'objet 4 de poid 2 va dans le sac 1
-L'objet 5 de poid 2 va dans le sac 1
-L'objet 6 de poid 2 va dans le sac 1
-L'objet 7 de poid 5 va dans le sac 2
-L'objet 8 de poid 5 va dans le sac 3
-L'objet 9 de poid 5 va dans le sac 4
-L'objet 10 de poid 5 va dans le sac 5
-L'objet 11 de poid 6 va dans le sac 6
-L'objet 12 de poid 8 va dans le sac 7
----------POID---------
-le sac 0 a un poid 9
-le sac 1 a un poid 5
-le sac 2 a un poid 5
-le sac 3 a un poid 5
-le sac 4 a un poid 5
-le sac 5 a un poid 6
-le sac 6 a un poid 8
-nbr de sac = 7
-HEURISTIQUE 2
--------------------
-L'objet 1 de poid 1 va dans le sac 1
-L'objet 2 de poid 1 va dans le sac 1
-L'objet 3 de poid 1 va dans le sac 1
-L'objet 4 de poid 2 va dans le sac 1
-L'objet 5 de poid 2 va dans le sac 1
-L'objet 6 de poid 2 va dans le sac 1
-L'objet 7 de poid 5 va dans le sac 2
-L'objet 8 de poid 5 va dans le sac 3
-L'objet 9 de poid 5 va dans le sac 4
-L'objet 10 de poid 5 va dans le sac 5
-L'objet 11 de poid 6 va dans le sac 6
-L'objet 12 de poid 8 va dans le sac 7
----------POID---------
-le sac 0 a un poid 9
-le sac 1 a un poid 5
-le sac 2 a un poid 5
-le sac 3 a un poid 5
-le sac 4 a un poid 5
-le sac 5 a un poid 6
-le sac 6 a un poid 8
-nbr de sac = 7
-HEURISTIQUE 3
--------------------
-L'objet 1 de poid 1 va dans le sac 1
-L'objet 2 de poid 1 va dans le sac 1
-L'objet 3 de poid 1 va dans le sac 1
-L'objet 4 de poid 2 va dans le sac 1
-L'objet 5 de poid 2 va dans le sac 1
-L'objet 6 de poid 2 va dans le sac 1
-L'objet 7 de poid 5 va dans le sac 2
-L'objet 8 de poid 5 va dans le sac 3
-L'objet 9 de poid 5 va dans le sac 4
-L'objet 10 de poid 5 va dans le sac 5
-L'objet 11 de poid 6 va dans le sac 6
-L'objet 12 de poid 8 va dans le sac 7
----------POID---------
-le sac 0 a un poid 9
-le sac 1 a un poid 5
-le sac 2 a un poid 5
-le sac 3 a un poid 5
-le sac 4 a un poid 5
-le sac 5 a un poid 6
-le sac 6 a un poid 8
-nbr de sac = 7
---non-trié--
-HEURISTIQUE 1
-L'objet 1 de poid 5 va dans le sac 1
-L'objet 2 de poid 1 va dans le sac 1
-L'objet 3 de poid 2 va dans le sac 1
-L'objet 4 de poid 6 va dans le sac 2
-L'objet 5 de poid 5 va dans le sac 3
-L'objet 6 de poid 2 va dans le sac 3
-L'objet 7 de poid 5 va dans le sac 4
-L'objet 8 de poid 5 va dans le sac 5
-L'objet 9 de poid 2 va dans le sac 5
-L'objet 10 de poid 8 va dans le sac 6
-L'objet 11 de poid 1 va dans le sac 6
-L'objet 12 de poid 1 va dans le sac 7
----------POID---------
-le sac 0 a un poid 8
-le sac 1 a un poid 6
-le sac 2 a un poid 7
-le sac 3 a un poid 5
-le sac 4 a un poid 7
-le sac 5 a un poid 9
-le sac 6 a un poid 1
-nbr de sac = 7
-HEURISTIQUE 2
--------------------
-L'objet 1 de poid 5 va dans le sac 1
-L'objet 2 de poid 1 va dans le sac 1
-L'objet 3 de poid 2 va dans le sac 1
-L'objet 4 de poid 6 va dans le sac 2
-L'objet 5 de poid 5 va dans le sac 3
-L'objet 6 de poid 2 va dans le sac 2
-L'objet 7 de poid 5 va dans le sac 4
-L'objet 8 de poid 5 va dans le sac 5
-L'objet 9 de poid 2 va dans le sac 3
-L'objet 10 de poid 8 va dans le sac 6
-L'objet 11 de poid 1 va dans le sac 1
-L'objet 12 de poid 1 va dans le sac 2
----------POID---------
-le sac 0 a un poid 9
-le sac 1 a un poid 9
-le sac 2 a un poid 7
-le sac 3 a un poid 5
-le sac 4 a un poid 5
-le sac 5 a un poid 8
-nbr de sac = 6
-HEURISTIQUE 3
--------------------
-L'objet 1 de poid 5 va dans le sac 1
-L'objet 2 de poid 1 va dans le sac 1
-L'objet 3 de poid 2 va dans le sac 1
-L'objet 4 de poid 6 va dans le sac 2
-L'objet 5 de poid 5 va dans le sac 3
-L'objet 6 de poid 2 va dans le sac 2
-L'objet 7 de poid 5 va dans le sac 4
-L'objet 8 de poid 5 va dans le sac 5
-L'objet 9 de poid 2 va dans le sac 3
-L'objet 10 de poid 8 va dans le sac 6
-L'objet 11 de poid 1 va dans le sac 1
-L'objet 12 de poid 1 va dans le sac 2
----------POID---------
-le sac 0 a un poid 9
-le sac 1 a un poid 9
-le sac 2 a un poid 7
-le sac 3 a un poid 5
-le sac 4 a un poid 5
-le sac 5 a un poid 8
-nbr de sac = 6
+En mode non-trié :
+Quand les données ne sont pas triées, on constate que l'heuristique 1 est la moins optimale, par contre les deux autres heuristiques apportent des résultats equivalents.
+
+Conclusion :
+En fonction des données en entrée, certaines heuristiques ne sont pas efficaces, par contre il est interessant de constater que l'heuristique 2 n'est jamais la moins efficace.
+-------- Pour l'exemple 1 --------
+Nombre d'objets : 5
+2 5 7 3 1
+
+
+Les données ont été triée
+
+----------------------
+Heuristique 1- Capacité de chaque sac 8
+le 1 eme de poids 7 dans le sac 1
+le 2 eme de poids 5 dans le sac 2
+le 3 eme de poids 3 dans le sac 2
+le 4 eme de poids 2 dans le sac 3
+le 5 eme de poids 1 dans le sac 3
+
+----------------------
+Heuristique 2- Capacité de chaque sac 8
+le 1 eme de poids 7 dans le sac 1
+le 2 eme de poids 5 dans le sac 2
+le 3 eme de poids 3 dans le sac 2
+le 4 eme de poids 2 dans le sac 3
+le 5 eme de poids 1 dans le sac 1
+
+----------------------
+Heuristique 3- Capacité de chaque sac 8
+le 1 eme de poids 7 dans le sac 1
+le 2 eme de poids 5 dans le sac 2
+le 3 eme de poids 3 dans le sac 3
+le 4 eme de poids 2 dans le sac 4
+le 5 eme de poids 1 dans le sac 1
+
+---------------------------------
+En non-trié :
+----------------------
+Heuristique 1- Capacité de chaque sac 8
+le 1 eme de poids 2 dans le sac 1
+le 2 eme de poids 5 dans le sac 1
+le 3 eme de poids 7 dans le sac 2
+le 4 eme de poids 3 dans le sac 3
+le 5 eme de poids 1 dans le sac 3
+
+----------------------
+Heuristique 2- Capacité de chaque sac 8
+le 1 eme de poids 2 dans le sac 1
+le 2 eme de poids 5 dans le sac 1
+le 3 eme de poids 7 dans le sac 2
+le 4 eme de poids 3 dans le sac 3
+le 5 eme de poids 1 dans le sac 1
+
+----------------------
+Heuristique 3- Capacité de chaque sac 8
+le 1 eme de poids 2 dans le sac 1
+le 2 eme de poids 5 dans le sac 1
+le 3 eme de poids 7 dans le sac 2
+le 4 eme de poids 3 dans le sac 3
+le 5 eme de poids 1 dans le sac 1
+
+---------------------------------
+-------- Pour l'exemple 2 --------
+---------------------------------
+Nombre d'objets : 5
+3 5 7 3 3 
+
+
+Les données ont été triée
+
+----------------------
+Heuristique 1- Capacité de chaque sac 7
+le 1 eme de poids 7 dans le sac 1
+le 2 eme de poids 5 dans le sac 2
+le 3 eme de poids 3 dans le sac 3
+le 4 eme de poids 3 dans le sac 3
+le 5 eme de poids 3 dans le sac 4
+
+----------------------
+Heuristique 2- Capacité de chaque sac 7
+le 1 eme de poids 7 dans le sac 1
+le 2 eme de poids 5 dans le sac 2
+le 3 eme de poids 3 dans le sac 3
+le 4 eme de poids 3 dans le sac 3
+le 5 eme de poids 3 dans le sac 4
+
+----------------------
+Heuristique 3- Capacité de chaque sac 7
+le 1 eme de poids 7 dans le sac 1
+le 2 eme de poids 5 dans le sac 2
+le 3 eme de poids 3 dans le sac 3
+le 4 eme de poids 3 dans le sac 4
+le 5 eme de poids 3 dans le sac 5
+
+
+---------------------------------
+En non trié :
+----------------------
+Heuristique 1- Capacité de chaque sac 7
+le 1 eme de poids 3 dans le sac 1
+le 2 eme de poids 5 dans le sac 2
+le 3 eme de poids 7 dans le sac 3
+le 4 eme de poids 3 dans le sac 4
+le 5 eme de poids 3 dans le sac 4
+
+----------------------
+Heuristique 2- Capacité de chaque sac 7
+le 1 eme de poids 3 dans le sac 1
+le 2 eme de poids 5 dans le sac 2
+le 3 eme de poids 7 dans le sac 3
+le 4 eme de poids 3 dans le sac 1
+le 5 eme de poids 3 dans le sac 4
+
+----------------------
+Heuristique 3- Capacité de chaque sac 7
+le 1 eme de poids 3 dans le sac 1
+le 2 eme de poids 5 dans le sac 2
+le 3 eme de poids 7 dans le sac 3
+le 4 eme de poids 3 dans le sac 1
+le 5 eme de poids 3 dans le sac 4
+
+---------------------------------
+-------- Pour l'exemple 3 --------
+---------------------------------
+
+Nombre d'objets : 8
+2 6 5 2 5 5 2 8 
+
+
+Les données ont été triée
+
+----------------------
+Heuristique 1- Capacité de chaque sac 9
+le 1 eme de poids 8 dans le sac 1
+le 2 eme de poids 6 dans le sac 2
+le 3 eme de poids 5 dans le sac 3
+le 4 eme de poids 5 dans le sac 4
+le 5 eme de poids 5 dans le sac 5
+le 6 eme de poids 2 dans le sac 5
+le 7 eme de poids 2 dans le sac 5
+le 8 eme de poids 2 dans le sac 6
+
+----------------------
+Heuristique 2- Capacité de chaque sac 9
+le 1 eme de poids 8 dans le sac 1
+le 2 eme de poids 6 dans le sac 2
+le 3 eme de poids 5 dans le sac 3
+le 4 eme de poids 5 dans le sac 4
+le 5 eme de poids 5 dans le sac 5
+le 6 eme de poids 2 dans le sac 5
+le 7 eme de poids 2 dans le sac 5
+le 8 eme de poids 2 dans le sac 6
+
+----------------------
+Heuristique 3- Capacité de chaque sac 9
+le 1 eme de poids 8 dans le sac 1
+le 2 eme de poids 6 dans le sac 2
+le 3 eme de poids 5 dans le sac 3
+le 4 eme de poids 5 dans le sac 4
+le 5 eme de poids 5 dans le sac 5
+le 6 eme de poids 2 dans le sac 6
+le 7 eme de poids 2 dans le sac 7
+le 8 eme de poids 2 dans le sac 8
+
+---------------------------------
+En non trié
+---------------------------------
+Heuristique 1- Capacité de chaque sac 9
+le 1 eme de poids 2 dans le sac 1
+le 2 eme de poids 6 dans le sac 1
+le 3 eme de poids 5 dans le sac 2
+le 4 eme de poids 2 dans le sac 2
+le 5 eme de poids 5 dans le sac 3
+le 6 eme de poids 5 dans le sac 4
+le 7 eme de poids 2 dans le sac 4
+le 8 eme de poids 8 dans le sac 5
+
+----------------------
+Heuristique 2- Capacité de chaque sac 9
+le 1 eme de poids 2 dans le sac 1
+le 2 eme de poids 6 dans le sac 1
+le 3 eme de poids 5 dans le sac 2
+le 4 eme de poids 2 dans le sac 2
+le 5 eme de poids 5 dans le sac 3
+le 6 eme de poids 5 dans le sac 4
+le 7 eme de poids 2 dans le sac 4
+le 8 eme de poids 8 dans le sac 5
+
+----------------------
+Heuristique 3- Capacité de chaque sac 9
+le 1 eme de poids 2 dans le sac 1
+le 2 eme de poids 6 dans le sac 1
+le 3 eme de poids 5 dans le sac 2
+le 4 eme de poids 2 dans le sac 3
+le 5 eme de poids 5 dans le sac 4
+le 6 eme de poids 5 dans le sac 5
+le 7 eme de poids 2 dans le sac 6
+le 8 eme de poids 8 dans le sac 7
 
 

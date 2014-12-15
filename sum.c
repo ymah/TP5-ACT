@@ -22,18 +22,6 @@ int sumHeuristique1(int *objet, int s) {
 
 }
 
-int sumHeuristique1Bis(int *objet, int s) {
-  int i = 0;
-  int resTmp = 0;
-  for(i = 0; i < nobjet; i++) {
-    if(resTmp == s)
-      return 1;
-    else {
-      resTmp += objet[i];
-    }
-  }
-  return 0;
-}
 
 int checkDigit(char * digit) {
   int i = 0;

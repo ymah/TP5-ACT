@@ -49,7 +49,7 @@ void heuristiqueTrie(){
 
 
 void triData(){
-  quickSort(objet,0,nobjet);
+  quickSort(objet,0,nobjet-1);
   printf("\n\nLes données ont été triée\n");
 
 }
@@ -77,9 +77,9 @@ int partitionner( int a[], int l, int r) {
 
   while( 1)
     {
-      do ++i; while( a[i] <= pivot && i <= r );
-      do --j; while( a[j] > pivot );
-      if( i >= j ) break;
+      do ++i; while( a[i] > pivot);
+      do --j; while( a[j] < pivot );
+      if( i > j ) break;
       t = a[i]; a[i] = a[j]; a[j] = t;
     }
   t = a[l]; a[l] = a[j]; a[j] = t;
