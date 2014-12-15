@@ -71,7 +71,7 @@ int heuristique1(int *objet,int o_size,int *lsac,int cap_s){
 /* Pour chaque objet, on regarde si il rentre dans un des sacs créés: si oui, on le met dans le premier qui convient; sinon, on créee un nouveau sac et on y met l’objet; */
 int heuristique2(int *objet,int o_size,int *lsac,int cap_s){
   int ok,i,j,cptSac;
-  /* on remplit tout les sacs avec leur capacité  */  
+  /* on remplit tout les sacs avec leur capacité  */
   for(i=0;i<o_size;i++){
     lsac[i]=cap_s;
   }
@@ -104,84 +104,62 @@ int heuristique2(int *objet,int o_size,int *lsac,int cap_s){
 }
 
 /* Pour chaque objet, on regarde si il rentre dans un des sacs créés: si oui, on le met dans le celui qui est le plus rempli parmi ceux qui conviennent. Sinon, on crée un nouveau sac et on y met l’objet. */
+
+
+
 int heuristique3(int *objet,int o_size,int *lsac,int cap_s){
   int i,j,ok,fort,cptSac;
   for(i=0;i<o_size;i++){
     lsac[i]=cap_s;
   }
-  cptSac = 1;
-  ok = j=0;
-  fort = 0;
+  ok=fort=0;
+  cptSac = 0;
   for(i=0;i<o_size;i++){
-    
-    fort = 0;
-
-
-    /* pour chaque objets: on vérifir que le nombre de sacs n'est pas superieur au nbr d'objets (normalement, notre algorithme fait en sorte que cela ne doti jamais arriver) */
-    if(cptSac > o_size)
-      exit(EXIT_FAILURE);
-
-    /* on va parcourir tous les sacs déjà créé. Si un des objets rentre dans ce sac, on le met et on s'occupe du prochain objet */
-    for(j=0;j<cptSac;j++){
-      if((lsac[fort] - objet[i]) >= 0){
-        if(lsac[j] < lsac[fort]){
+    ok=fort=0;
+    for(j=0;j<=cptSac;j++)
+      if(lsac[fort] < lsac[j] && lsac[j] - objet[i] >= 0 )
           fort =j;
-        }
-        lsac[fort] -= objet[i];
-        res[i] = j;
-        ok = 1;
-        break;
-      }
+    if((lsac[fort] - objet[i]) >= 0 ){
+      lsac[fort] -= objet[i];
+      ok=1;
+      res[i] = fort;
     }
-
-    /* si on a parcourus tous les sacs et que l'on a pas réussi à y ranger l'objet, on créé un nouveau sac et on y range l'objet courant */
     if(!ok){
-      j++;
-      ok=0;
-      lsac[j]= cap_s - objet[i];
-      res[i] =j ;
-      courant = j;
       cptSac++;
+      lsac[cptSac] -= objet[i];
+      res[i] = cptSac;
+      ok = 1;
     }
   }
-
 
   return 0;
 }
 
-void getData(){
 
+
+void getData(){
   char c;
   int i;
   i=0;
-
   if((c=getchar()) == EOF)
     exit(EXIT_FAILURE);
-  nobjet = c -'0';
-  c=getchar();
-  if(c!=10){
+  nobjet =c -'0';
+  if((c=getchar()) != 10){
     nobjet *= 10;
-    nobjet+= c -'0';
+    nobjet+= c - '0';
   }
   printf("\nNombre d'objets : %d\n",nobjet);
   objet = calloc(nobjet,sizeof(int));
-
   while(i!=nobjet){
-    switch(c=getchar()){
-    case 10:
-    case 32:
-      break;
-    default :
-      if(objet[i] != 0)
-        objet[i] = objet[i]*10 + (c - '0');
-      else
-        objet[i] = (c - '0');
-      printf("%d ",objet[i]);
-      i++;
-    break;
-    }
+    if((c=getchar()) == EOF)
+      exit(EXIT_FAILURE);
+    if(c==10 || c==32)
+      continue;
+    objet[i]= c - '0';
+    printf("%d ",objet[i]);
+    i++;
   }
-    printf("\n");
+  printf("\n");
   getchar();
   getchar();
   getchar();
